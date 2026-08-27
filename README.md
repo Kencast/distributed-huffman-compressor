@@ -2,6 +2,9 @@
 
 A scalable, distributed file compression system that uses **Huffman encoding** to achieve efficient data compression across multiple worker nodes coordinated by a central server.
 
+## About this fork
+This is a fork of a team project built for a Data Structures course, kept here to document the networked coordinator/worker design. Original team: Alejandro Cerdas, Danilo Duque, Kener Castillo, and Pablo Pérez.
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
@@ -30,11 +33,11 @@ This project implements a **distributed Huffman compression system** that:
 
 ### Key Benefits
 
-✅ **Scalability** - Leverage multiple servers for compression of large files  
-✅ **Efficiency** - Huffman encoding reduces file size significantly  
-✅ **Modularity** - Clear separation between central server and worker nodes  
-✅ **Fault Tolerance** - File chunks processed independently  
-✅ **Reversible** - Perfect reconstruction of original files  
+**Scalability** - Leverage multiple servers for compression of large files  
+**Efficiency** - Huffman encoding reduces file size significantly  
+**Modularity** - Clear separation between central server and worker nodes  
+**Fault Tolerance** - File chunks processed independently  
+**Reversible** - Perfect reconstruction of original files  
 
 ## How It Works
 
@@ -451,29 +454,6 @@ For each bit in input:
 - Linear speedup with worker count (communication bottleneck)
 - Optimal for files > 10 MB
 - Recommended max workers: 10 (network overhead)
-
-## Troubleshooting
-
-### Issue: "Cannot connect to server"
-**Solution:** Ensure central server is running and port is accessible
-
-### Issue: "Error receiving the file"
-**Solution:** Check network connectivity and firewall settings
-
-### Issue: "Decompressed file corrupted"
-**Solution:** Verify huffman.table exists and matches compressed file
-
-### Issue: "Segmentation fault"
-**Solution:** Check buffer sizes and file paths in config.h
-
-## Contributing
-
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/YourFeature`)
-3. Commit changes (`git commit -am 'Add YourFeature'`)
-4. Push to branch (`git push origin feature/YourFeature`)
-5. Submit a Pull Request
 
 ## Future Enhancements
 
