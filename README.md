@@ -16,7 +16,6 @@ This is a fork of a team project built for a Data Structures course, kept here t
 - [Usage](#usage)
 - [Building](#building)
 - [Configuration](#configuration)
-- [Components](#components)
 - [Algorithm Details](#algorithm-details)
 - [License](#license)
 
@@ -328,73 +327,6 @@ Insert the number of client servers: <N>
 ```
 
 Where `<N>` is the number of worker nodes expected to connect.
-
-## Components
-
-### 1. Central Server (`MainServer.c`)
-
-**Responsibilities:**
-- Listen for worker connections
-- Split input file into chunks
-- Aggregate byte frequency tables from workers
-- Generate optimal Huffman codes
-- Coordinate compression across workers
-- Merge compressed outputs
-- Save Huffman code table
-
-**Key Data Structures:**
-```c
-int dto[MAX_SIZE*2];           // Huffman codes (length, bitmask pairs)
-client_info info[MAX_CLIENT];  // Worker connection info
-ll freqTable[MAX_SIZE];        // Aggregated frequency table
-```
-
-### 2. Worker Nodes (`RunWorker.c`)
-
-**Responsibilities:**
-- Connect to central server
-- Receive file chunk
-- Calculate byte frequencies
-- Receive Huffman code table
-- Compress chunk using codes
-- Send compressed output back
-
-**Process:**
-1. Establish TCP connection to central server
-2. Receive file chunk to process
-3. Count byte frequencies in chunk
-4. Wait for Huffman code table
-5. Encode file chunk using received codes
-6. Send compressed chunk back to server
-
-### 3. Huffman Engine (`Compressor/Huffman/`)
-
-**Files:**
-- `Node.h` - Tree node structure
-- `Tree.h` - Tree building operations
-- `Priority_Queue.h` - Min-heap for optimal tree construction
-
-**Algorithm:**
-1. Create leaf node for each byte with frequency
-2. Add all nodes to priority queue
-3. While queue has > 1 node:
-   - Extract two nodes with minimum frequency
-   - Create parent node with sum of frequencies
-   - Add parent back to queue
-4. Root of resulting tree is Huffman tree
-
-### 4. Decompressor (`Decompressor/run.c`)
-
-**Process:**
-1. Load Huffman code table from file
-2. Rebuild Huffman tree from table
-3. Read compressed file bit-by-bit
-4. For each bit:
-   - Traverse tree (1 = right, 0 = left)
-   - When reaching leaf, output symbol
-   - Reset to root
-5. Handle padding bits at end
-6. Verify consistency
 
 ## Algorithm Details
 
